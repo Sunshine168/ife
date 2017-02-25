@@ -28,7 +28,7 @@ node --harmony-async-await demo1.js keyword pic
 获得当前页面的图片并渲染出来
 
 结果
-![germy](media/14880172723731/result.png)
+![germy](media/14880172723731/14880175893249.png)
 
 pic:
 
