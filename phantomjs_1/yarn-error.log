@@ -1,0 +1,40 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add phantom
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  0.19.1
+
+Node version: 
+  6.10.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "phantomjs_1",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "maizi",
+    "license": "ISC",
+    "dependencies": {
+      "phantomjs": "^2.1.7+deprecated"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: ENOENT: no such file or directory, open '/Users/MacBook/Documents/nodeSutdy/ife-study/phantomjs_1/node_modules/dashdash/node_modules/assert-plus/package.json'
+      at Error (native)
