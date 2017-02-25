@@ -4,13 +4,10 @@ if (process.argv.length < 3) {
 	return;
 }
 let keyword = process.argv[2];
-console.log(process.argv.length);
-console.log(process.argv[3]);
 let url = encodeURI(`https://www.baidu.com/s?wd=${keyword}`);
 (async function() {
 	const instance = await phantom.create();
 	const page = await instance.createPage();
-	console.log("accessing" + url);
 	const status = await page.open(url);
 	if (status !== 'success') {
 		console.log("访问失败");
@@ -30,6 +27,7 @@ let url = encodeURI(`https://www.baidu.com/s?wd=${keyword}`);
 			});
 			await page.render('germy.png');
 		}
+		let start = Date.now();
 		let result = await page.evaluate(function() {
 			return $('.result.c-container').map(function() {
 				return ({
@@ -40,11 +38,15 @@ let url = encodeURI(`https://www.baidu.com/s?wd=${keyword}`);
 				});
 			}).toArray();
 		});
-		console.log(result);
-
+		let data = {
+			cose: 1,
+			msg: "抓取成功",
+			word: keyword,
+			time: Date.now() - start,
+			dataList: result
+		}
+		console.log(JSON.stringify(data));
 	}
-
-
 
 	await instance.exit();
 }());
