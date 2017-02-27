@@ -32,5 +32,5 @@ node --harmony-async-await demo1.js keyword pic
 
 pic:
 
-![germy](media/14880172723731/germy.png)
+![germy](media/14880172723731/germy.png)	
 
