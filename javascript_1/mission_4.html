@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+/**{
+	margin: 0;
+	padding: 0;
+}*/
+	ul li{
+		display: inline-block;
+		margin-left: 10px;
+		width: 40px;
+		height: 40px;
+		background-color: #f60022;
+		color: #fff;
+		line-height: 40px;
+		text-align: center;
+	}
+</style>
+<body>
+<input type="text" id="input"> 
+<button id="leftEnter">左侧入</button> 
+<button id="rightEnter">右侧入</button> 
+<button id="leftOut">左侧出</button> 
+<button id="rightOut">右侧出</button>
+<ul id="display"></ul>
+</body>
+<script>
+    function getInput(){
+       var input = document.getElementById('input'),
+           value = input.value;
+         if(/[1-9]+/.test(value)){
+         	 input.value='';
+         	 return value;
+         }else{
+         	input.focus();
+         	return false;
+         }
+	}
+    function leftAdd(){
+    	var value = getInput();
+         if(value){
+                 var display  = document.getElementById('display'),
+                     li_list  = display.getElementsByTagName('li');
+                 var element = document.createElement('li');
+                 element.innerHTML = value;
+                 if(li_list.length==0){
+                      display.appendChild(element)
+                 }else{
+                 	display.insertBefore(element,li_list[0]);
+                 }
+
+         }
+    }
+    function leftRemove(){
+    	   var display = document.getElementById('display');
+    	      console.log(display.childNodes.length);
+    	       if(display.childNodes.length>0){
+    	       	   var value = display.childNodes[0].innerHTML;
+    	       	   display.removeChild(display.childNodes[0]);
+    	       	   alert(value);
+    	       }
+    }
+    function rightAdd(){
+    	var value = getInput();
+         if(value){
+                 var display  = document.getElementById('display');
+                 var element = document.createElement('li');
+                 element.innerHTML = value;
+                 display.appendChild(element)
+
+         }
+    }
+    function rightRemove(){
+    	  var display = document.getElementById('display'),
+    	      childNodes = display.childNodes;
+    	       if(childNodes.length>0){
+    	       	   var value = childNodes[childNodes.length-1].innerHTML;
+    	       	   display.removeChild(display.childNodes[childNodes.length-1]);
+    	       	   alert(value);
+    	       }
+    }
+     document.getElementById('leftEnter').onclick  = leftAdd;
+     document.getElementById('leftOut').onclick = leftRemove;
+     document.getElementById('rightEnter').onclick=rightAdd;
+     document.getElementById('rightOut').onclick  = rightRemove;
+</script>
+</html>
