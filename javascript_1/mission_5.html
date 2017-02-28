@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+/**{
+	margin: 0;
+	padding: 0;
+}*/
+	ul li{
+		display: inline-block;
+		margin-left: 10px;
+		width: 20px;
+		background-color: #f60022;
+		color: #fff;
+		line-height: 40px;
+		text-align: center;
+	}
+</style>
+<body>
+<input type="text" id="input"> 
+<button id="addElement">增加元素</button>
+<button id="sortElement">排序元素</button>
+<ul id="display"></ul>
+</body>
+<script>
+    var data = [];
+    function initData(){
+        for(var i =0;i<40;i++){
+            var randomValue = parseInt(Math.random()*91+10);
+            data.push(randomValue)
+        }
+    }
+    function getInput(){
+       var input = document.getElementById('input'),
+           value = input.value;
+         if(/[1-9][0-9]/.test(value)){
+         	 input.value='';
+         	 return value;
+         }else{
+         	input.focus();
+         	return false;
+         }
+	}
+    function sort(){
+        var display =document.getElementById('display')
+        var childNodes = display.getElementsByTagName('li');
+        for(var i = 0;i<childNodes.length;i++){
+            var flag = 0;
+            for(var j =1;j<childNodes.length-i;j++){
+                  if(childNodes[j-1].style.height<childNodes[j].style.height){
+                     var temp = childNodes[j];
+                     display.removeChild(childNodes[j]);
+                     display.insertBefore(temp,childNodes[j-1]);
+                     flag=1;
+                  }
+            }
+            if(flag==0)break;
+        }
+    }
+    (function(){
+        initData()
+     if(data.length>0){
+        //箭头函数是es6的内容，如果浏览器不支持es6的内容会报错的~
+        data.map((value)=>{
+          var element = document.createElement('li');
+          element.style.height = value+"px";
+          document.getElementById('display').appendChild(element);
+          return value;
+        }); 
+
+
+     }
+     document.getElementById('addElement').onclick = function(){
+     if(data.length>60){
+        alert("队列已满");
+     }else{
+        var value = getInput()
+        if(value){
+           data.push(value);
+           var element = document.createElement('li');
+           element.style.height = value+"px";
+          document.getElementById('display').appendChild(element);
+        }
+     }
+ }
+  document.getElementById('sortElement').onclick = sort;
+    })()
+
+</script>
+</html>
