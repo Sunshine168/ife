@@ -306,5 +306,47 @@ init();
 建议不使用任何第三方库、框架
 
 
+##mission_6
+
+笔记:
+匹配字符串的方法
+
+~~~
+stringObject.match(searchvalue)//传入字符串
+stringObject.match(regexp)//传入正则表达式
+~~~
+
+字符串转正则(存在一定的安全问题)来源于网上
+
+~~~
+var str = '/'+keyword+'/';
+str = str.replace(/\/\//g,"\/");
+var newStr = eval(str);
+~~~
+
+这里拓展一下关于正则表达式的内容
+在js里面\w是不能匹配到汉字的
+所以需要自己写一个正则
+
+
+~~~
+//单汉字的正则匹配式是
+[\u4e00-\u9fa5]
+//所以匹配汉字、数字、英文的正则表达式则是
+/[\u4e00-\u9fa5a-zA-Z0-9]+/g
+~~~
+
+最近看了一些文章有讲到通过
+Array.prototype.map()(min in IE9)
+取代循环 这里就尝试一下使用了
+
+~~~
+var array = [1,2,3,4];
+var newArray = array.prototype.map((value)=>{
+return value*2;
+});
+//newArray=[2,4,6,8]；
+
+~~~
 
 

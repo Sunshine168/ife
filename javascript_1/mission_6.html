@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	span{
+		color: #f60022;
+	}
+	.show{
+      height: 100px;
+      width: 100px;
+	}
+</style>
+<body>
+	<div id="myBlock">
+    <textarea name="input" id="input" cols="30" rows="10"></textarea>
+	<input type="text" id="match">
+	<button id="goMatch">模糊匹配</button>
+	</div>
+	<script>
+      document.getElementById('goMatch').onclick = function(){
+      	   var input = document.getElementById('input'),
+      	       inputText = input.value,
+      	       keyword = document.getElementById('match').value;
+      	       var context = inputText.match(/[\u4e00-\u9fa5a-zA-Z0-9]+/g);
+      	       debugger;
+      	       var str = '/'+keyword+'/';
+               str = str.replace(/\/\//g,"\/");
+               var newStr = eval(str);
+               var words=[];
+      	         context.map((value)=>{
+      	       	   if(newStr.test(value))words.push(value);
+      	       	
+      	       })
+      	       console.log(words);
+      	       
+      	       words.map((value)=>{
+      	       	var highlight = "<span>"+value+"</span>";
+      	       inputText=inputText.replace(value,highlight);
+      	       })
+      	       var element = document.createElement('div');
+      	           element.style.className="show";
+      	           element.innerHTML = inputText;
+      	           document.getElementById('myBlock').insertBefore(element,input);
+      	           document.getElementById('myBlock').removeChild(input);
+
+      }
+	</script>
+</body>
+</html>
