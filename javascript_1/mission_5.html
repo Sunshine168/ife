@@ -48,7 +48,7 @@
         var display =document.getElementById('display')
         var childNodes = display.getElementsByTagName('li');
         for(var i = 0;i<childNodes.length;i++){
-            var flag = 0;
+            var flag = 0;//标记该次循环中是否发生交换
             for(var j =1;j<childNodes.length-i;j++){
                   if(childNodes[j-1].style.height<childNodes[j].style.height){
                      var temp = childNodes[j];
@@ -57,7 +57,7 @@
                      flag=1;
                   }
             }
-            if(flag==0)break;
+            if(flag==0)break; //若没有交换则跳出循环
         }
     }
     (function(){

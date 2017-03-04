@@ -15,12 +15,13 @@ const device = process.argv[3] || '';
 		console.log("访问失败");
 		return;
 	} else {
-		console.log(devices_config[device]);
-		page.setting('userAgent', devices_config[device]['userAgent']);
-		await page.property('viewportSize', {
-			'width': devices_config[device]['width'],
-			'height': devices_config[device]['height']
-		});
+		if (device != '') {
+			page.setting('userAgent', devices_config[device]['userAgent']);
+			await page.property('viewportSize', {
+				'width': devices_config[device]['width'],
+				'height': devices_config[device]['height']
+			});
+		}
 		let start = Date.now();
 		let result = await page.evaluate(function() {
 			return $('.result.c-container').map(function() {

@@ -25,17 +25,17 @@
       	       inputText = input.value,
       	       keyword = document.getElementById('match').value;
       	       var context = inputText.match(/[\u4e00-\u9fa5a-zA-Z0-9]+/g);
-      	       debugger;
+
+      	       //通过eval进行字符串运算把字符串转化成正则表达式~ eval方法存在一定的不安全性~ 如果有更好的希望指出
       	       var str = '/'+keyword+'/';
                str = str.replace(/\/\//g,"\/");
                var newStr = eval(str);
                var words=[];
+               //通过数组的map方法取代循环
       	         context.map((value)=>{
       	       	   if(newStr.test(value))words.push(value);
       	       	
-      	       })
-      	       console.log(words);
-      	       
+      	       })	       
       	       words.map((value)=>{
       	       	var highlight = "<span>"+value+"</span>";
       	       inputText=inputText.replace(value,highlight);
