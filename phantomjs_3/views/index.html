@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<label for="keyword"><input type="text" id="keyword">关键字</label>
+<select name="" id="url">
+    <option value="1">百度</option>
+     <option value="2">Google</option>
+</select>
+<button id="ToSearch">搜索</button>
+</body>
+<script>
+    function search(){
+        let value = document.getElementById('keyword').value;
+        console.log(value);
+        if(value){
+            let url = document.getElementById('url');
+              fetch('',{
+             headers:{
+                 'Accept':'application/json',
+                 'Content-Type':'application/json',
+             },
+             methos:"POST",
+             body:JSON.stringify({
+                 keyword:keyword,
+                 url:url
+             })
+              }).then((response)=>response.json()).then((responseJson)=>{
+                  
+              })
+        }
+    }
+</script>
+</html>
