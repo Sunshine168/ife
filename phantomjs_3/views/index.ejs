@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<label for="keyword"><input type="text" id="keyword">关键字</label>
+<select name="" id="url">
+    <option value="1">百度</option>
+     <option value="2">Google</option>
+</select>
+<button id="ToSearch">搜索</button>
+<div id ="display">
+    <table>
+            <tr>
+                <td>pic:</td>
+                <td>title</td>
+                <td>info</td>
+                <td>link</td>  
+            </tr>
+        </thead>
+        <tbody id="tbody">
+             
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+
+    function search(){
+        var value = document.getElementById('keyword').value,
+        tbody = document.getElementById('tbody');
+        if(value){
+             tbody.innerHTML="";
+            var url = document.getElementById('url').value||'';
+            var request = new Request('/search/1',{
+           headers:{
+               'Accept':'application/json',
+               'Content-Type':'application/json',
+           },
+           method:"POST",
+           body:JSON.stringify({
+               keyword:value,
+               url:url
+           })
+         });
+              fetch(request).then((response)=>response.json()).then((responseJson)=>{
+                                console.log(responseJson);
+                                var data=responseJson.data;
+                                updateData(data);
+ var images = document.getElementsByTagName('img');
+    console.log(images);
+    for(var i = 0 ;i<images.length ;i++){
+              var image = images[i];
+              var src   = images[i].getAttribute('data-src');
+              if(src!=null){
+                 image.src = src;
+              }
+    }
+              })
+        }
+    }
+    function updateData(data){
+              tbody = document.getElementById('tbody');
+                        for(var i = 0;i<data.length;i++){
+                            var img = null;
+                             var tr = document.createElement('tr'),
+                                pic   = document.createElement('td'),
+                                title = document.createElement('td'),
+                                info  = document.createElement('td'),
+                                link  =document.createElement('td');
+                            if(data[i].pic!=""){
+                                img =new Image(100,100)
+                                img.setAttribute ('data-src',"img/"+data[i].pid);
+
+                                img.onload = function(){
+                                     var src = this.getAttribute('data-src');
+                                }
+                                img.src = "/img/loading.gif";
+                            }
+                            if(img!=null){
+                                pic.appendChild(img);
+                            }else{
+                                pic.innerHTML = "无缩略图";
+
+                            }
+                            title.innerHTML = data[i].title;
+                            info.innerHTML  =data[i].info;
+                            link.innerHTML  =data[i].link;
+                            tr.appendChild(pic);
+                            tr.appendChild(title);
+                            tr.appendChild(info);
+                            tr.appendChild(link);
+                            tbody.appendChild(tr);
+                        }
+    }
+    document.getElementById('ToSearch').onclick = search;
+
+</script>
+</html>
