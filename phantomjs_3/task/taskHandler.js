@@ -4,16 +4,14 @@ const router = require('koa-router');
 var task = new router();
 const Data = require('../models/Data');
 task.post('/1', async(ctx) => {
-  console.log("post?");
   let keyword = ctx.request.body.keyword || '',
-    searchUrl = ctx.request.body.url || '';
+    device = ctx.request.body.device || '';
   let resultData = new Object();
   ctx.response.type = 'application/json';
   if (keyword) {
     console.log("search：" + keyword);
-    const cmd = `node --harmony-async-await ./task/task.js ${keyword}`;
+    const cmd = `node --harmony-async-await ./task/task.js ${keyword} ${device}`;
     console.log("cmd with" + cmd);
-    //调用
     const {
       stdout
     } = await execAsync(cmd);

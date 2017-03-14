@@ -8,9 +8,10 @@
 </head>
 <body>
 <label for="keyword"><input type="text" id="keyword">关键字</label>
-<select name="" id="url">
-    <option value="1">百度</option>
-     <option value="2">Google</option>
+<select name="" id="device">
+    <option value="iphone5">iphone5</option>
+     <option value="iphone6">iphone6</option>
+      <option value="ipad">ipad</option>
 </select>
 <button id="ToSearch">搜索</button>
 <div id ="display">
@@ -35,7 +36,7 @@
         tbody = document.getElementById('tbody');
         if(value){
              tbody.innerHTML="";
-            var url = document.getElementById('url').value||'';
+            var device = document.getElementById('device').value||'';
             var request = new Request('/search/1',{
            headers:{
                'Accept':'application/json',
@@ -44,7 +45,7 @@
            method:"POST",
            body:JSON.stringify({
                keyword:value,
-               url:url
+               device:device
            })
          });
               fetch(request).then((response)=>response.json()).then((responseJson)=>{
