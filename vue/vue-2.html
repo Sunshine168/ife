@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//base on  https://github.com/youngwind/blog/issues/84 
+		//观察者构造函数
+		function Observer(data){
+			this.data = data ; 
+			this.walk(data);
+		}
+		let  p  = Observer.prototype;
+		p.convert = function(key,val){
+			var that = this;
+			console.log(that);
+			Object.defineProperty(this.data,key,{
+				enumerable:true,
+				configurable:true,
+				get:function(){
+					console.log('你访问了'+ key);
+					that.$onEvent(key,val);
+					return val;
+				},
+				set:function(newVal){
+					console.log('你设置了'+key+',新的'+key+'='+newVal);
+					that.$onEvent(key,newVal);
+					if(newVal===val) return ;
+					val = newVal;
+				}
+			})
+		}
+	p.walk = function (obj) {
+    let val;
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            val = obj[key];
+            if (typeof val === 'object') {
+                new Observer(val);
+            }
+
+            this.convert(key, val);
+        }
+    }
+};
+
+p.eventLists  = {};
+p.$watch = function(event,fn){
+   if(!this.eventLists[event]){
+   	this.eventLists[event]=[];
+   }
+   this.eventLists[event] = fn ;
+}	
+p.$onEvent=function(event,val){
+	if(event&&this.eventLists[event]){
+          this.eventLists[event](val); 
+
+	}
+}
+let app1 = new Observer({
+  name: 'youngwind',
+  age: 25,
+  test:{
+  	a:1,
+  	b:2
+  }
+});
+
+let app2 = new Observer({
+  university: 'bupt',
+  major: 'computer'
+});
+ app1.$watch('age', function(age) {
+         console.log(`我的年纪变了，现在已经是：${age}岁了`)
+ });
+ app1.data.test.a = 100; // 输出：'我的年纪变了，现在已经是100岁了'
+ app1.data.age = 100; // 输出：'我的年纪变了，现在已经是100岁了'
+	</script>
+</body>
+</html>
