@@ -28,6 +28,25 @@
 - [x] 动态数据绑定（一）
 - [x] 动态数据绑定（二）
 
+---
+
+发现前端学院将要结束了,提早罗列学习任务。
+
+webGL部分
+
+- [ ] WebGL No.1 - Three.js 入门
+- [ ] WebGL No. 2 - 光与影
+- [ ] WebGL No. 3 - 材质与纹理
+- [ ] WebGL No. 4 - 照相机和交互控制
+
+ECharts 部分
+
+- [ ] ECharts NO.1 - 零基础绘制ECharts图表
+- [ ] ECharts NO.2 - 实现自定义的统计图表
+- [ ] ECharts No.4 - 可视化前的数据预处理
+- [ ] ECharts No.5 - 动态数据(进阶)
+
+
 
 
  
