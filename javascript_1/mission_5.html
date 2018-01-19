@@ -36,7 +36,7 @@
     function getInput(){
        var input = document.getElementById('input'),
            value = input.value;
-         if(/[1-9][0-9]/.test(value)){
+         if(/^[1-9][0-9]$|100/.test(value)){
          	 input.value='';
          	 return value;
          }else{
